@@ -5,20 +5,7 @@
  */
 
 // Initialize database connection
-$host = "127.0.0.1";
-$user = "root";
-$password = "";
-$database = "mucahub_db";
-
-$conn = new mysqli($host, $user, $password, $database);
-
-if ($conn->connect_error) {
-    die(json_encode([
-        'success' => false,
-        'status' => 'Database connection failed',
-        'error' => $conn->connect_error
-    ]));
-}
+require_once '../includes/databases/db_connection.php';
 
 header('Content-Type: application/json');
 

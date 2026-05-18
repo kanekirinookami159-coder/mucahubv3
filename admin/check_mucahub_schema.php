@@ -1,15 +1,7 @@
 <?php
-$host = "127.0.0.1";
-$user = "root";
-$password = "";
-$port = 3306;
+include '../includes/databases/db_connection.php';
 
-$conn = mysqli_connect($host, $user, $password, "mucahub_db", $port);
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-
-echo "=== STUDENTS TABLE IN MUCAHUB_DB ===\n";
+echo "=== STUDENTS TABLE IN {$database} ===\n";
 $result = $conn->query("DESCRIBE students");
 if ($result) {
     while ($row = $result->fetch_assoc()) {
