@@ -1,0 +1,405 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+background:#f4f6f8;
+min-height:100vh;
+display:flex;
+flex-direction:column;
+overflow-x:hidden;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+position:fixed;
+left:0;
+top:0;
+width:240px;
+height:100vh;
+background:#556b2f;
+color:white;
+padding-top:20px;
+}
+
+.logo{
+text-align:center;
+font-size:23px;
+font-weight:bold;
+margin-bottom:30px;
+}
+
+.sidebar ul{
+list-style:none;
+}
+
+.sidebar ul a{
+text-decoration:none;
+color:white;
+display:block;
+}
+
+.sidebar ul li{
+padding:15px 25px;
+cursor:pointer;
+display:flex;
+align-items:center;
+gap:10px;
+transition:0.3s;
+}
+
+.sidebar ul li:hover{
+background:#6b8e23;
+}
+
+/* MAIN CONTENT */
+
+.main{
+margin-left:240px;
+width:calc(100% - 240px);
+padding:30px;
+flex:1;
+min-height:100vh;
+position:relative;
+}
+
+.main h2{
+margin-bottom:20px;
+}
+
+/* TIMELINE */
+
+.timeline{
+background:white;
+padding:20px;
+border-radius:6px;
+margin-bottom:20px;
+box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* CALENDAR CONTAINER */
+
+.calendar-container{
+background:white;
+padding:20px;
+border-radius:6px;
+box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* CALENDAR HEADER */
+
+.calendar-header{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:20px;
+margin-bottom:10px;
+}
+
+.calendar-header button{
+background:#556b2f;
+border:none;
+color:white;
+padding:6px 12px;
+cursor:pointer;
+border-radius:4px;
+}
+
+/* CALENDAR GRID */
+
+.calendar-header{
+display:flex;
+align-items:center;
+gap:12px;
+justify-content:space-between;
+margin-bottom:10px;
+}
+
+.calendar-header button{
+background:#556b2f;
+border:none;
+color:white;
+padding:8px 12px;
+cursor:pointer;
+border-radius:6px;
+font-size:1rem;
+}
+
+#currentMonth{
+font-weight:700;
+font-size:1rem;
+color:#334155;
+}
+
+.calendar-days{
+display:grid;
+grid-template-columns:repeat(7,1fr);
+gap:6px;
+margin-bottom:6px;
+}
+
+.calendar-days div{
+background:#f8fafc;
+padding:10px 0;
+border-radius:6px;
+text-align:center;
+font-weight:700;
+color:#475569;
+}
+
+#calendar{
+display:grid;
+grid-template-columns:repeat(7,1fr);
+gap:6px;
+min-height:320px;
+}
+
+.day{
+background:white;
+border:1px solid #ddd;
+min-height:90px;
+padding:8px;
+font-size:14px;
+}
+
+.today{
+background:#dbe7c9;
+border:2px solid #556b2f;
+}
+
+/* FLOAT BUTTONS */
+
+.floating-buttons{
+position:fixed;
+right:10px;
+top:200px;
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.floating-buttons button{
+background:#556b2f;
+border:none;
+color:white;
+padding:12px;
+border-radius:50%;
+cursor:pointer;
+font-size:16px;
+box-shadow:0 2px 5px rgba(0,0,0,0.3);
+    position:relative;
+}
+
+.notification-dot {
+    position:absolute;
+    top:8px;
+    right:8px;
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:#e74c3c;
+    box-shadow:0 0 0 2px rgba(255,255,255,0.9);
+    display:none;
+}
+
+.sidepanel {
+    position:fixed;
+    right:-350px;
+    top:0;
+    width:320px;
+    height:100vh;
+    background:white;
+    box-shadow:-3px 0 10px rgba(0,0,0,0.2);
+    padding:20px;
+    transition:0.4s;
+    overflow:auto;
+    z-index:1000;
+}
+
+.sidepanel.active{
+    right:0;
+}
+
+/* CLOSE BUTTON */
+
+.profile-panel-header{
+display:flex;
+justify-content:flex-end;
+gap:8px;
+align-items:center;
+margin-bottom:15px;
+}
+
+.profile-panel-header .closeBtn,
+.profile-panel-header .backBtn {
+border:none;
+background:#d32f2f;
+color:white;
+padding:5px 8px;
+cursor:pointer;
+border-radius:4px;
+}
+
+.profile-panel-header .backBtn {
+background:#555;
+}
+
+.closeBtn{
+float:right;
+border:none;
+background:red;
+color:white;
+padding:5px 8px;
+cursor:pointer;
+border-radius:4px;
+}
+
+/* TASK INPUT */
+
+#taskText{
+width:100%;
+padding:8px;
+margin-top:10px;
+margin-bottom:10px;
+border:1px solid #ccc;
+border-radius:4px;
+}
+
+#taskDate{
+width:100%;
+padding:8px;
+margin-top:10px;
+border:1px solid #ccc;
+border-radius:4px;
+}
+
+/* SAVE BUTTON */
+
+.sidepanel button{
+margin-top:10px;
+padding:8px 12px;
+background:#556b2f;
+color:white;
+border:none;
+border-radius:4px;
+cursor:pointer;
+}
+
+/* TASK LIST */
+
+#taskList{
+margin-top:15px;
+list-style:none;
+}
+
+#taskList li{
+background:#f2f2f2;
+padding:8px;
+margin-bottom:8px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-radius:4px;
+}
+
+/* SIDEBAR BOTTOM PROFILE */
+
+.sidebar-bottom{
+position:absolute;
+bottom:20px;
+width:100%;
+}
+
+.sidebar-bottom li{
+padding:15px 25px;
+cursor:pointer;
+display:flex;
+align-items:center;
+gap:10px;
+background:#6b8e23;
+transition:0.3s;
+}
+
+.sidebar-bottom li:hover{
+background:#556b2f;
+}
+
+/* FOOTER */
+
+footer{
+  margin-left:240px;
+  background:#333;
+  color:white;
+  padding:20px;
+  margin-top:auto;
+}
+
+footer .footer{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+footer .footer-row{
+  display:flex;
+  flex-wrap:nowrap;
+  gap:12px;
+  align-items:center;
+  overflow-x:auto;
+}
+
+footer .footer-school-name{
+  font-size:1.3rem;
+  font-weight:800;
+  margin:0 0 8px 0;
+  line-height:1.2;
+}
+
+footer .footer-location{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  color:#b3d7ff;
+  text-decoration:none;
+}
+
+footer .footer-link{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex:0 0 auto;
+  color:#4da6ff;
+  text-decoration:none;
+  background:rgba(255,255,255,0.05);
+  border-radius:8px;
+  padding:12px 16px;
+}
+
+footer .footer-link:hover,
+footer .footer-location:hover{
+  background:rgba(255,255,255,0.12);
+}
+
+footer .footer-icon{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:24px;
+  height:24px;
+}
+
+footer .footer-icon img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+
+footer a{
+  color:#4da6ff;
+  text-decoration:none;
+}
+

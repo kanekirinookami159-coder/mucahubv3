@@ -1,0 +1,248 @@
+CREATE TABLE `admins` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(100) NOT NULL,
+  `middle_name` varchar(10) DEFAULT NULL,
+  `last_name` varchar(10w0) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+CREATE TABLE `announcements` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `target` enum('student','instructor','all') NOT NULL DEFAULT 'all',
+  `files` text DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+CREATE TABLE `announcements` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `target` enum('student','instructor','all') NOT NULL DEFAULT 'all',
+  `files` text DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+CREATE TABLE `instructors` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `employee_number` varchar(50) NOT NULL,
+  `first_name` varchar(100) NOT NULL,
+  `middle_name` varchar(100) DEFAULT NULL,
+  `last_name` varchar(100) NOT NULL,
+  `email` varchar(150) DEFAULT NULL,
+  `password` varchar(255) NOT NULL DEFAULT '',
+  `dob` date DEFAULT NULL,
+  `age` int(11) DEFAULT NULL,
+  `address` text DEFAULT NULL,
+  `contact_number` varchar(20) DEFAULT NULL,
+  `date_employment` date DEFAULT NULL,
+  `employee_type` varchar(50) DEFAULT NULL,
+  `advisory_grade` varchar(50) DEFAULT NULL,
+  `advisory_section` varchar(50) DEFAULT NULL,
+  `subjects` text DEFAULT NULL,
+  `force_password_change` tinyint(1) NOT NULL DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `last_modified` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+CREATE TABLE `login_history` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `role` enum('student','instructor','admin') NOT NULL,
+  `employee_number` varchar(50) DEFAULT NULL,
+  `login_time` datetime NOT NULL,
+  `logout_time` datetime DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+CREATE TABLE `students` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `student_id` varchar(50) NOT NULL,
+  `lrn` varchar(50) NOT NULL,
+  `email` varchar(150) DEFAULT NULL,
+  `password` varchar(255) NOT NULL DEFAULT '',
+  `first_name` varchar(100) NOT NULL,
+  `middle_name` varchar(100) DEFAULT NULL,
+  `last_name` varchar(100) NOT NULL,
+  `date_of_birth` date NOT NULL,
+  `age` int(11) NOT NULL,
+  `gender` varchar(10) NOT NULL,
+  `parent_first_name` varchar(100) NOT NULL,
+  `parent_last_name` varchar(100) NOT NULL,
+  `relationship` varchar(50) NOT NULL,
+  `contact_number` varchar(20) NOT NULL,
+  `address` text NOT NULL,
+  `emergency_contact` varchar(20) NOT NULL,
+  `grade_level` varchar(50) NOT NULL,
+  `section` varchar(50) NOT NULL,
+  `adviser` varchar(100) NOT NULL,
+  `enrollment_status` varchar(50) NOT NULL,
+  `date_enrolled` date NOT NULL,
+  `student_type` varchar(50) NOT NULL,
+  `force_password_change` tinyint(1) NOT NULL DEFAULT 0,
+  `medical_conditions` text DEFAULT NULL,
+  `allergies` text DEFAULT NULL,
+  `last_modified` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+CREATE TABLE `teacher_activity_grade_records` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `assignment_id` int(11) NOT NULL,
+  `activity_title` varchar(255) NOT NULL,
+  `instructor_id` int(11) NOT NULL,
+  `instructor_name` varchar(255) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `student_name` varchar(255) NOT NULL,
+  `grade_level` varchar(50) NOT NULL,
+  `section` varchar(50) NOT NULL,
+  `subject_name` varchar(100) NOT NULL,
+  `status` enum('submitted','late','not submitted') NOT NULL DEFAULT 'not submitted',
+  `submission_file_path` varchar(500) DEFAULT NULL,
+  `grade_value` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `graded_at` timestamp NULL DEFAULT NULL,
+  `graded_by` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `assignment_id` (`assignment_id`),
+  KEY `student_id` (`student_id`),
+  CONSTRAINT `fk_teacher_activity_grade_records_assignment` FOREIGN KEY (`assignment_id`) REFERENCES `teacher_assignments` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+CREATE TABLE `teacher_activity_grade_records` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `assignment_id` int(11) NOT NULL,
+  `activity_title` varchar(255) NOT NULL,
+  `instructor_id` int(11) NOT NULL,
+  `instructor_name` varchar(255) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `student_name` varchar(255) NOT NULL,
+  `grade_level` varchar(50) NOT NULL,
+  `section` varchar(50) NOT NULL,
+  `subject_name` varchar(100) NOT NULL,
+  `status` enum('submitted','late','not submitted') NOT NULL DEFAULT 'not submitted',
+  `submission_file_path` varchar(500) DEFAULT NULL,
+  `grade_value` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `graded_at` timestamp NULL DEFAULT NULL,
+  `graded_by` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `assignment_id` (`assignment_id`),
+  KEY `student_id` (`student_id`),
+  CONSTRAINT `fk_teacher_activity_grade_records_assignment` FOREIGN KEY (`assignment_id`) REFERENCES `teacher_assignments` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+CREATE TABLE `teacher_assignment_groups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `assignment_id` int(11) NOT NULL,
+  `group_name` varchar(255) NOT NULL,
+  `leader_student_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `assignment_id` (`assignment_id`),
+  KEY `leader_student_id` (`leader_student_id`),
+  CONSTRAINT `fk_teacher_assignment_groups_assignment` FOREIGN KEY (`assignment_id`) REFERENCES `teacher_assignments` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_teacher_assignment_groups_leader` FOREIGN KEY (`leader_student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+CREATE TABLE `teacher_assignment_submissions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `assignment_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `submission_text` text DEFAULT NULL,
+  `submission_file_path` varchar(500) DEFAULT NULL,
+  `submitted_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` enum('submitted','graded','late') DEFAULT 'submitted',
+  PRIMARY KEY (`id`),
+  KEY `assignment_id` (`assignment_id`),
+  KEY `student_id` (`student_id`),
+  CONSTRAINT `fk_teacher_assignment_submissions_assignment` FOREIGN KEY (`assignment_id`) REFERENCES `teacher_assignments` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_teacher_assignment_submissions_student` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+CREATE TABLE `teacher_assignment_submissions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `assignment_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `submission_text` text DEFAULT NULL,
+  `submission_file_path` varchar(500) DEFAULT NULL,
+  `submitted_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` enum('submitted','graded','late') DEFAULT 'submitted',
+  PRIMARY KEY (`id`),
+  KEY `assignment_id` (`assignment_id`),
+  KEY `student_id` (`student_id`),
+  CONSTRAINT `fk_teacher_assignment_submissions_assignment` FOREIGN KEY (`assignment_id`) REFERENCES `teacher_assignments` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_teacher_assignment_submissions_student` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+CREATE TABLE `teacher_grade_records` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `assignment_id` int(11) DEFAULT NULL,
+  `instructor_id` int(11) NOT NULL,
+  `instructor_name` varchar(255) NOT NULL,
+  `grade_level` varchar(50) NOT NULL,
+  `section` varchar(50) NOT NULL,
+  `subject_name` varchar(100) NOT NULL,
+  `grading_period` varchar(20) NOT NULL DEFAULT '1st',
+  `activity_title` varchar(255) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `student_name` varchar(255) NOT NULL,
+  `grade_value` int(11) DEFAULT NULL,
+  `recorded_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `modified_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `assignment_id` (`assignment_id`),
+  KEY `student_id` (`student_id`),
+  CONSTRAINT `fk_teacher_grade_records_assignment` FOREIGN KEY (`assignment_id`) REFERENCES `teacher_assignments` (`id`) ON DELETE SET NULL
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+CREATE TABLE `teacher_lesson_access` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `lesson_id` int(11) NOT NULL,
+  `accessed_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `lesson_id` (`lesson_id`),
+  CONSTRAINT `fk_teacher_lesson_access_lesson` FOREIGN KEY (`lesson_id`) REFERENCES `teacher_lessons` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+CREATE TABLE `teacher_lessons` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `instructor_id` int(11) NOT NULL,
+  `instructor_name` varchar(255) NOT NULL,
+  `grade_level` varchar(50) NOT NULL,
+  `section` varchar(50) NOT NULL,
+  `subject_name` varchar(100) NOT NULL,
+  `grading_period` varchar(20) NOT NULL DEFAULT '1st',
+  `title` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `file_name` varchar(255) DEFAULT NULL,
+  `file_path` varchar(500) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `instructor_id` (`instructor_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

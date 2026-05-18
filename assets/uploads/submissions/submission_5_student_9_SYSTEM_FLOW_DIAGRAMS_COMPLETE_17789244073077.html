@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MUCAHUB - Complete System Flow Diagrams</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .info-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .info-box h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .info-box p {
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .diagram-section {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .diagram-section h2 {
+            color: #667eea;
+            margin-bottom: 30px;
+            font-size: 1.8em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .diagram-section h2::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 30px;
+            background: #667eea;
+            border-radius: 4px;
+        }
+        
+        .mermaid {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        
+        .legend {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #eee;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .legend-color {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            flex-shrink: 0;
+        }
+        
+        .color-auth { background: #0066cc; }
+        .color-content { background: #00a366; }
+        .color-work { background: #ff6600; }
+        .color-grade { background: #ff3366; }
+        .color-system { background: #ffcc00; color: black; }
+        
+        .legend-text {
+            font-size: 0.95em;
+            color: #333;
+        }
+        
+        .description {
+            background: #f8f9fa;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+            margin-top: 20px;
+            border-radius: 6px;
+        }
+        
+        .description h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .description p {
+            color: #555;
+            line-height: 1.6;
+            margin: 8px 0;
+        }
+        
+        .page-reference {
+            background: #f0f7ff;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #333;
+        }
+        
+        .page-reference strong {
+            color: #667eea;
+        }
+        
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .export-info {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .export-info strong {
+            color: #856404;
+        }
+        
+        .export-info p {
+            color: #856404;
+            margin: 8px 0;
+        }
+
+        .diagram-container {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        @media (max-width: 768px) {
+            .diagram-section {
+                padding: 20px;
+            }
+            
+            header h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎓 MUCAHUB LMS - Complete System Flow</h1>
+            <p>Real Pages & Functions - Detailed Workflows</p>
+        </header>
+        
+        <div class="export-info">
+            <strong>💾 Export Diagrams:</strong>
+            <p>Right-click any diagram → "Save image as" → Choose JPG format</p>
+            <p>Or use: Print to PDF for best quality</p>
+        </div>
+
+        <!-- DIAGRAM 1: COMPLETE SYSTEM FLOW WITH ACTUAL PAGES -->
+        <div class="diagram-section">
+            <h2>🔄 Complete System Flow (With Actual Pages)</h2>
+            <div class="diagram-container">
+                <div class="mermaid">
+                    graph TD
+                        Start["🌐 MUCAHUB LMS Entry"]
+                        
+                        Start --> Auth{"🔐 Login Handler"}
+                        
+                        Auth -->|Admin| AdminAuth["✅ Admin Session"]
+                        Auth -->|Instructor| InstructorAuth["✅ Instructor Session"]
+                        Auth -->|Student| StudentAuth["✅ Student Session"]
+                        
+                        AdminAuth --> AdminDash["📊 Admin Dashboard<br/>analytics.php<br/>Get Stats & Announcements"]
+                        
+                        InstructorAuth --> InstructorDash["📊 Instructor Dashboard<br/>instructor_dashboard.php<br/>Show Materials & Tasks"]
+                        
+                        StudentAuth --> StudentDash["📊 Student Dashboard<br/>student_dashboard.php<br/>Pending Activities"]
+                        
+                        AdminDash --> AdminCore["ADMIN FUNCTIONS"]
+                        AdminCore --> AM1["👥 Manage Students<br/>manage_students.php"]
+                        AdminCore --> AM2["👨‍🏫 Manage Instructors<br/>manage_instructors.php"]
+                        AdminCore --> AM3["📚 Manage Courses<br/>manage_courses.php"]
+                        AdminCore --> AM4["📢 Announcements<br/>announcements.php"]
+                        AdminCore --> AM5["📈 Analytics<br/>analytics.php"]
+                        
+                        AM1 --> AS1["Search Students"]
+                        AM1 --> AS2["Add Student"]
+                        AM1 --> AS3["Edit Student"]
+                        AM1 --> AS4["Delete Student"]
+                        
+                        InstructorDash --> InstructorCore["INSTRUCTOR FUNCTIONS"]
+                        InstructorCore --> IC1["📖 Lessons<br/>lessons.php<br/>Upload & Manage"]
+                        InstructorCore --> IC2["📝 Grades<br/>grades.php<br/>Record & Review"]
+                        InstructorCore --> IC3["👥 My Class<br/>my_class.php<br/>View Students"]
+                        InstructorCore --> IC4["📊 Analytics<br/>Track Performance"]
+                        
+                        IC1 --> IL1["Create Lesson"]
+                        IC1 --> IL2["Upload Materials"]
+                        IC1 --> IL3["Manage Lessons"]
+                        
+                        IC2 --> IG1["View Students"]
+                        IC2 --> IG2["Select Grading Period"]
+                        IC2 --> IG3["Record Grades"]
+                        IC2 --> IG4["View Report Card"]
+                        
+                        StudentDash --> StudentCore["STUDENT FUNCTIONS"]
+                        StudentCore --> SC1["📖 Lessons<br/>lessons.php<br/>Browse & Download"]
+                        StudentCore --> SC2["🎓 My Courses<br/>my_courses.php<br/>View Courses"]
+                        StudentCore --> SC3["📝 Assignments<br/>submit_assignment.php<br/>Submit Work"]
+                        StudentCore --> SC4["⭐ Grades<br/>grade.php<br/>View Results"]
+                        
+                        SC1 --> SL1["List Lessons"]
+                        SC1 --> SL2["Download Materials"]
+                        
+                        SC2 --> SCC1["View Course Info"]
+                        
+                        SC3 --> SA1["View Assignments"]
+                        SC3 --> SA2["Submit Assignment"]
+                        
+                        SC4 --> SG1["View Grades"]
+                        SC4 --> SG2["Download Report Card"]
+                        
+                        AS1 --> DB[(("🗄️ Database<br/>school_lms"))]
+                        AS2 --> DB
+                        AS3 --> DB
+                        AS4 --> DB
+                        IL1 --> DB
+                        IL2 --> DB
+                        IL3 --> DB
+                        IG1 --> DB
+                        IG2 --> DB
+                        IG3 --> DB
+                        IG4 --> DB
+                        SL1 --> DB
+                        SL2 --> DB
+                        SCC1 --> DB
+                        SA1 --> DB
+                        SA2 --> DB
+                        SG1 --> DB
+                        SG2 --> DB
+                        AM4 --> DB
+                        AM5 --> DB
+                        
+                        style Start fill:#0066cc,stroke:#004a99,stroke-width:3px,color:#fff
+                        style Auth fill:#0066cc,stroke:#004a99,stroke-width:3px,color:#fff
+                        style AdminAuth fill:#0066cc,stroke:#004a99,stroke-width:2px,color:#fff
+                        style InstructorAuth fill:#0066cc,stroke:#004a99,stroke-width:2px,color:#fff
+                        style StudentAuth fill:#0066cc,stroke:#004a99,stroke-width:2px,color:#fff
+                        style AdminDash fill:#ff6600,stroke:#cc5200,stroke-width:2px,color:#fff
+                        style InstructorDash fill:#ff6600,stroke:#cc5200,stroke-width:2px,color:#fff
+                        style StudentDash fill:#ff6600,stroke:#cc5200,stroke-width:2px,color:#fff
+                        style AdminCore fill:#ff6600,stroke:#cc5200,stroke-width:2px,color:#fff
+                        style InstructorCore fill:#ff6600,stroke:#cc5200,stroke-width:2px,color:#fff
+                        style StudentCore fill:#ff6600,stroke:#cc5200,stroke-width:2px,color:#fff
+                        style AM1 fill:#ff3366,stroke:#cc1a4d,stroke-width:2px,color:#fff
+                        style AM2 fill:#ff3366,stroke:#cc1a4d,stroke-width:2px,color:#fff
+                        style AM3 fill:#ff3366,stroke:#cc1a4d,stroke-width:2px,color:#fff
+                        style AM4 fill:#ff3366,stroke:#cc1a4d,stroke-width:2px,color:#fff
+                        style AM5 fill:#ff3366,stroke:#cc1a4d,stroke-width:2px,color:#fff
+                        style IC1 fill:#00a366,stroke:#007a4d,stroke-width:2px,color:#fff
+                        style IC2 fill:#00a366,stroke:#007a4d,stroke-width:2px,color:#fff
+                        style IC3 fill:#00a366,stroke:#007a4d,stroke-width:2px,color:#fff
+                        style IC4 fill:#00a366,stroke:#007a4d,stroke-width:2px,color:#fff
+                        style SC1 fill:#00a366,stroke:#007a4d,stroke-width:2px,color:#fff
+                        style SC2 fill:#00a366,stroke:#007a4d,stroke-width:2px,color:#fff
+                        style SC3 fill:#00a366,stroke:#007a4d,stroke-width:2px,color:#fff
+                        style SC4 fill:#00a366,stroke:#007a4d,stroke-width:2px,color:#fff
+                        style DB fill:#ffcc00,stroke:#cc9900,stroke-width:3px,color:#000
+                    </div>
+            </div>
+            
+            <div class="description">
+                <h4>📋 What This Shows:</h4>
+                <p><strong>Entry Point:</strong> Login Handler (login_handler.php) authenticates all users</p>
+                <p><strong>Role-Based Access:</strong> Each role gets their specific dashboard and pages</p>
+                <p><strong>Actual Pages:</strong> Shows real .php files used in the system</p>
+                <p><strong>Central Database:</strong> All operations store data in school_lms database</p>
+            </div>
+
+            <div class="page-reference">
+                <strong>Files Referenced:</strong> login_handler.php, admin/dashboard.php, instructor/instructor_dashboard.php, student/student_dashboard.php
+            </div>
+        </div>
+
+        <!-- DIAGRAM 2: ADMIN WORKFLOW WITH PAGES & FUNCTIONS -->
+        <div class="diagram-section">
+            <h2>👨‍💼 Admin Complete Workflow (Pages & Functions)</h2>
+            <div class="diagram-container">
+                <div class="mermaid">
+                    graph LR
+                        A["🔐<br/>Login<br/>login_handler.php"]
+                        
+                        B["📊<br/>Dashboard<br/>dashboard.php<br/>View Stats"]
+                        
+                        C["👥<br/>Manage Students<br/>manage_students.php"]
+                        D["Search"]
+                        E["Add"]
+                        F["Edit"]
+                        G["Delete"]
+                        H["Save: save_student.php"]
+                        
+                        I["👨‍🏫<br/>Manage Instructors<br/>manage_instructors.php"]
+                        J["Search"]
+                        K["Add"]
+                        L["Edit"]
+                        M["Delete"]
+                        N["Save: save_instructor.php"]
+                        
+                        O["📚<br/>Manage Courses<br/>manage_courses.php"]
+                        P["Create"]
+                        Q["Edit"]
+                        R["Delete"]
+                        S["Save: save_course.php"]
+                        
+                        T["📢<br/>Announcements<br/>announcements.php"]
+                        U["Create"]
+                        V["Broadcast"]
+                        
+                        W["📈<br/>Analytics<br/>analytics.php<br/>get_analytics_data.php"]
+                        X["View Reports"]
+                        Y["Track Metrics"]
+                        
+                        Z[("🗄️<br/>Database<br/>school_lms")]
+                        
+                        A --> B
+                        B --> C
+                        B --> I
+                        B --> O
+                        B --> T
+                        B --> W
+                        
+                        C --> D
+                        C --> E
+                        C --> F
+                        C --> G
+                        D -.->|search_student.php| Z
+                        E --> H
+                        F --> H
+                        G -.->|delete_student.php| Z
+                        H --> Z
+                        
+                        I --> J
+                        I --> K
+                        I --> L
+                        I --> M
+                        J -.->|search_instructor.php| Z
+                        K --> N
+                        L --> N
+                        M -.->|delete_instructor.php| Z
+                        N --> Z
+                        
+                        O --> P
+                        O --> Q
+                        O --> R
+                        P --> S
+                        Q --> S
+                        R -.->|remove_course.php| Z
+                        S --> Z
+                        
+                        T --> U
+                        T --> V
+                        U --> Z
+                        V --> Z
+                        
+                        W --> X
+                        W --> Y
+                        X --> Z
+                        Y --> Z
+                        
+                        style A fill:#0066cc,stroke:#004a99,stroke-width:3px,color:#fff
+                        style B fill:#ff6600,stroke:#cc5200,stroke-width:2px,color:#fff
+                        style C fill:#ff3366,stroke:#cc1a4d,stroke-width:2px,color:#fff
+                        style I fill:#ff3366,stroke:#cc1a4d,stroke-width:2px,color:#fff
+                        style O fill:#ff3366,stroke:#cc1a4d,stroke-width:2px,color:#fff
+                        style T fill:#ff3366,stroke:#cc1a4d,stroke-width:2px,color:#fff
+                        style W fill:#ff3366,stroke:#cc1a4d,stroke-width:2px,color:#fff
+                        style D fill:#ffe6f0,stroke:#ff3366,stroke-width:2px
+                        style E fill:#ffe6f0,stroke:#ff3366,stroke-width:2px
+                        style F fill:#ffe6f0,stroke:#ff3366,stroke-width:2px
+                        style G fill:#ffe6f0,stroke:#ff3366,stroke-width:2px
+                        style H fill:#ff6b9d,stroke:#cc1a4d,stroke-width:2px,color:#fff
+                        style J fill:#ffe6f0,stroke:#ff3366,stroke-width:2px
+                        style K fill:#ffe6f0,stroke:#ff3366,stroke-width:2px
+                        style L fill:#ffe6f0,stroke:#ff3366,stroke-width:2px
+                        style M fill:#ffe6f0,stroke:#ff3366,stroke-width:2px
+                        style N fill:#ff6b9d,stroke:#cc1a4d,stroke-width:2px,color:#fff
+                        style P fill:#ffe6f0,stroke:#ff3366,stroke-width:2px
+                        style Q fill:#ffe6f0,stroke:#ff3366,stroke-width:2px
+                        style R fill:#ffe6f0,stroke:#ff3366,stroke-width:2px
+                        style S fill:#ff6b9d,stroke:#cc1a4d,stroke-width:2px,color:#fff
+                        style U fill:#ffe6f0,stroke:#ff3366,stroke-width:2px
+                        style V fill:#ffe6f0,stroke:#ff3366,stroke-width:2px
+                        style X fill:#ffe6f0,stroke:#ff3366,stroke-width:2px
+                        style Y fill:#ffe6f0,stroke:#ff3366,stroke-width:2px
+                        style Z fill:#ffcc00,stroke:#cc9900,stroke-width:3px,color:#000
+                    </div>
+            </div>
+            
+            <div class="description">
+                <h4>📋 Admin Workflow Functions:</h4>
+                <p><strong>Main Pages:</strong></p>
+                <p>• dashboard.php - View analytics, quick stats</p>
+                <p>• manage_students.php - Full student CRUD operations</p>
+                <p>• manage_instructors.php - Full instructor CRUD operations</p>
+                <p>• manage_courses.php - Full course management</p>
+                <p>• announcements.php - Create and broadcast announcements</p>
+                <p>• analytics.php - View system analytics and reports</p>
+                <p><strong>Helper Pages:</strong></p>
+                <p>• save_student.php, save_instructor.php, save_course.php - Process form submissions</p>
+                <p>• search_student.php, search_instructor.php - Handle search queries</p>
+                <p>• delete_student.php, delete_instructor.php, remove_course.php - Handle deletions</p>
+            </div>
+
+            <div class="page-reference">
+                <strong>Core Admin Pages:</strong> dashboard.php, manage_students.php, manage_instructors.php, manage_courses.php, announcements.php, analytics.php
+            </div>
+        </div>
+
+        <!-- DIAGRAM 3: INSTRUCTOR WORKFLOW WITH PAGES & FUNCTIONS -->
+        <div class="diagram-section">
+            <h2>👨‍🏫 Instructor Complete Workflow (Pages & Functions)</h2>
+            <div class="diagram-container">
+                <div class="mermaid">
+                    graph TD
+                        A["🔐 Login<br/>login_handler.php"]
+                        
+                        B["📊 Dashboard<br/>instructor_dashboard.php<br/>- Announcements<br/>- Recent Materials<br/>- Pending Activities"]
+                        
+                        C["📖 Lessons<br/>lessons.php<br/>Upload & Manage Content"]
+                        D["View Lessons"]
+                        E["Create Lesson"]
+                        F["Upload Materials"]
+                        G["Manage Lessons"]
+                        
+                        H["📝 Grades<br/>grades.php<br/>Record & Review Grades"]
+                        I["Select Grade/Subject"]
+                        J["Select Grading Period"]
+                        K["Select Students"]
+                        L["View Grade Records"]
+                        M["Record Grades"]
+                        N["Save Grade<br/>teacher_grade_records"]
+                        O["View Report Card<br/>get_report_card.php"]
+                        
+                        P["👥 My Class<br/>my_class.php<br/>View Students & Sections"]
+                        Q["View Students"]
+                        R["View Sections"]
+                        
+                        S["📊 Analytics<br/>Track Performance"]
+                        T["View Student Progress"]
+                        U["View Class Statistics"]
+                        
+                        V[("🗄️ Database<br/>school_lms")]
+                        
+                        A --> B
+                        B --> C
+                        B --> H
+                        B --> P
+                        B --> S
+                        
+                        C --> D
+                        C --> E
+                        C --> F
+                        C --> G
+                        
+                        H --> I
+                        I --> J
+                        J --> K
+                        K --> L
+                        L --> M
+                        M --> N
+                        N --> V
+                        H --> O
+                        O --> V
+                        
+                        P --> Q
+                        P --> R
+                        Q --> V
+                        R --> V
+                        
+                        S --> T
+                        S --> U
+                        T --> V
+                        U --> V
+                        
+                        D --> V
+                        E --> V
+                        F --> V
+                        G --> V
+                        
+                        style A fill:#0066cc,stroke:#004a99,stroke-width:3px,color:#fff
+                        style B fill:#ff6600,stroke:#cc5200,stroke-width:2px,color:#fff
+                        style C fill:#00a366,stroke:#007a4d,stroke-width:2px,color:#fff
+                        style H fill:#00a366,stroke:#007a4d,stroke-width:2px,color:#fff
+                        style P fill:#00a366,stroke:#007a4d,stroke-width:2px,color:#fff
+                        style S fill:#00a366,stroke:#007a4d,stroke-width:2px,color:#fff
+                        style D fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style E fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style F fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style G fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style I fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style J fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style K fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style L fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style M fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style N fill:#00a366,stroke:#007a4d,stroke-width:2px,color:#fff
+                        style O fill:#00a366,stroke:#007a4d,stroke-width:2px,color:#fff
+                        style Q fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style R fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style T fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style U fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style V fill:#ffcc00,stroke:#cc9900,stroke-width:3px,color:#000
+                    </div>
+            </div>
+            
+            <div class="description">
+                <h4>📋 Instructor Workflow Functions:</h4>
+                <p><strong>Main Pages:</strong></p>
+                <p>• instructor_dashboard.php - View announcements, materials, activities</p>
+                <p>• lessons.php - Upload and manage lesson materials</p>
+                <p>• grades.php - Record grades by grading period (1st, 2nd, 3rd, 4th)</p>
+                <p>• my_class.php - View students and sections</p>
+                <p><strong>Key Features:</strong></p>
+                <p>• Grading by period with multiple calculation options</p>
+                <p>• Report card generation (get_report_card.php)</p>
+                <p>• Performance analytics tracking</p>
+                <p>• Dashboard notifications for announcements and pending tasks</p>
+            </div>
+
+            <div class="page-reference">
+                <strong>Core Instructor Pages:</strong> instructor_dashboard.php, lessons.php, grades.php, my_class.php
+            </div>
+        </div>
+
+        <!-- DIAGRAM 4: STUDENT WORKFLOW WITH PAGES & FUNCTIONS -->
+        <div class="diagram-section">
+            <h2>🎓 Student Complete Workflow (Pages & Functions)</h2>
+            <div class="diagram-container">
+                <div class="mermaid">
+                    graph TD
+                        A["🔐 Login<br/>login_handler.php"]
+                        
+                        B["📊 Dashboard<br/>student_dashboard.php<br/>- Announcements<br/>- Pending Assignments<br/>- Recent Activities"]
+                        
+                        C["📖 Lessons<br/>lessons.php<br/>Browse & Download Materials"]
+                        D["List All Lessons"]
+                        E["View Lesson Details"]
+                        F["Download Material<br/>download_lesson.php"]
+                        G["Save to Recent<br/>Local Storage"]
+                        
+                        H["🎓 My Courses<br/>my_courses.php<br/>View Enrolled Courses"]
+                        I["List Courses"]
+                        J["View Course Info"]
+                        K["View Course Materials"]
+                        
+                        L["📝 Assignments<br/>View & Submit Work"]
+                        M["View Assignments"]
+                        N["Check Due Dates"]
+                        O["View Assignment Details"]
+                        P["Submit Assignment<br/>submit_assignment.php"]
+                        Q["Upload Files"]
+                        R["Save Submission<br/>teacher_assignment_submissions"]
+                        
+                        S["⭐ Grades<br/>grade.php<br/>View Academic Results"]
+                        T["View Grades by Period"]
+                        U["View Report Card<br/>get_report_card.php"]
+                        V["Download Report Card"]
+                        
+                        W["📱 Notifications<br/>Dashboard Alerts"]
+                        X["View Announcements"]
+                        Y["Mark as Read"]
+                        
+                        Z[("🗄️ Database<br/>school_lms")]
+                        
+                        A --> B
+                        B --> C
+                        B --> H
+                        B --> L
+                        B --> S
+                        B --> W
+                        
+                        C --> D
+                        C --> E
+                        E --> F
+                        F --> G
+                        D --> Z
+                        E --> Z
+                        F --> Z
+                        
+                        H --> I
+                        H --> J
+                        H --> K
+                        I --> Z
+                        J --> Z
+                        K --> Z
+                        
+                        L --> M
+                        L --> N
+                        M --> O
+                        N --> O
+                        O --> P
+                        P --> Q
+                        Q --> R
+                        R --> Z
+                        M --> Z
+                        
+                        S --> T
+                        S --> U
+                        T --> Z
+                        U --> V
+                        V --> Z
+                        
+                        W --> X
+                        W --> Y
+                        X --> Z
+                        Y --> Z
+                        
+                        style A fill:#0066cc,stroke:#004a99,stroke-width:3px,color:#fff
+                        style B fill:#ff6600,stroke:#cc5200,stroke-width:2px,color:#fff
+                        style C fill:#00a366,stroke:#007a4d,stroke-width:2px,color:#fff
+                        style H fill:#00a366,stroke:#007a4d,stroke-width:2px,color:#fff
+                        style L fill:#00a366,stroke:#007a4d,stroke-width:2px,color:#fff
+                        style S fill:#00a366,stroke:#007a4d,stroke-width:2px,color:#fff
+                        style W fill:#00a366,stroke:#007a4d,stroke-width:2px,color:#fff
+                        style D fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style E fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style F fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style G fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style I fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style J fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style K fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style M fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style N fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style O fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style P fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style Q fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style R fill:#00a366,stroke:#007a4d,stroke-width:2px,color:#fff
+                        style T fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style U fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style V fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style X fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style Y fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style Z fill:#ffcc00,stroke:#cc9900,stroke-width:3px,color:#000
+                    </div>
+            </div>
+            
+            <div class="description">
+                <h4>📋 Student Workflow Functions:</h4>
+                <p><strong>Main Pages:</strong></p>
+                <p>• student_dashboard.php - View announcements and pending activities</p>
+                <p>• lessons.php - Browse and download lesson materials</p>
+                <p>• my_courses.php - View enrolled courses</p>
+                <p>• submit_assignment.php - Submit assignment work</p>
+                <p>• grade.php - View grades and report cards</p>
+                <p><strong>Key Features:</strong></p>
+                <p>• Download lesson materials for offline access</p>
+                <p>• Submit assignments with file uploads</p>
+                <p>• Track pending assignments with due dates</p>
+                <p>• View grades organized by grading period</p>
+                <p>• Download official report cards</p>
+                <p>• Recent activity tracking in local storage</p>
+            </div>
+
+            <div class="page-reference">
+                <strong>Core Student Pages:</strong> student_dashboard.php, lessons.php, my_courses.php, submit_assignment.php, grade.php
+            </div>
+        </div>
+
+        <!-- DIAGRAM 5: DATABASE DATA FLOW -->
+        <div class="diagram-section">
+            <h2>🗄️ Data Flow Through System</h2>
+            <div class="diagram-container">
+                <div class="mermaid">
+                    graph LR
+                        INPUT["📥 INPUT SOURCES"]
+                        
+                        A["Admin Creates<br/>Students"]
+                        B["Admin Creates<br/>Instructors"]
+                        C["Admin Creates<br/>Courses"]
+                        D["Instructor Creates<br/>Lessons"]
+                        E["Instructor Creates<br/>Assignments"]
+                        F["Student Submits<br/>Work"]
+                        G["Instructor Records<br/>Grades"]
+                        H["Admin Broadcasts<br/>Announcements"]
+                        
+                        PROCESS["⚙️ PROCESSING"]
+                        
+                        STORE["🗄️ DATABASE STORAGE"]
+                        
+                        TABLES["📊 Data Stored In:"]
+                        T1["students"]
+                        T2["instructors"]
+                        T3["courses"]
+                        T4["teacher_lessons"]
+                        T5["teacher_assignments"]
+                        T6["teacher_assignment_submissions"]
+                        T7["teacher_grade_records"]
+                        T8["announcements"]
+                        
+                        ACCESS["🔍 DATA ACCESS"]
+                        
+                        USE1["Student Queries<br/>Lessons"]
+                        USE2["Student Queries<br/>Assignments"]
+                        USE3["Student Queries<br/>Grades"]
+                        USE4["Instructor Queries<br/>Grade Records"]
+                        USE5["Instructor Queries<br/>Submissions"]
+                        USE6["Admin Queries<br/>All Data"]
+                        
+                        OUTPUT["📤 OUTPUT LAYER"]
+                        
+                        OUT1["Download<br/>Materials"]
+                        OUT2["Generate<br/>Report Cards"]
+                        OUT3["Broadcast<br/>Announcements"]
+                        OUT4["Export<br/>Analytics"]
+                        
+                        INPUT --> A
+                        INPUT --> B
+                        INPUT --> C
+                        INPUT --> D
+                        INPUT --> E
+                        INPUT --> F
+                        INPUT --> G
+                        INPUT --> H
+                        
+                        A --> PROCESS
+                        B --> PROCESS
+                        C --> PROCESS
+                        D --> PROCESS
+                        E --> PROCESS
+                        F --> PROCESS
+                        G --> PROCESS
+                        H --> PROCESS
+                        
+                        PROCESS --> STORE
+                        
+                        STORE --> T1
+                        STORE --> T2
+                        STORE --> T3
+                        STORE --> T4
+                        STORE --> T5
+                        STORE --> T6
+                        STORE --> T7
+                        STORE --> T8
+                        
+                        T1 --> ACCESS
+                        T2 --> ACCESS
+                        T3 --> ACCESS
+                        T4 --> ACCESS
+                        T5 --> ACCESS
+                        T6 --> ACCESS
+                        T7 --> ACCESS
+                        T8 --> ACCESS
+                        
+                        ACCESS --> USE1
+                        ACCESS --> USE2
+                        ACCESS --> USE3
+                        ACCESS --> USE4
+                        ACCESS --> USE5
+                        ACCESS --> USE6
+                        
+                        USE1 --> OUTPUT
+                        USE2 --> OUTPUT
+                        USE3 --> OUTPUT
+                        USE4 --> OUTPUT
+                        USE5 --> OUTPUT
+                        USE6 --> OUTPUT
+                        
+                        OUTPUT --> OUT1
+                        OUTPUT --> OUT2
+                        OUTPUT --> OUT3
+                        OUTPUT --> OUT4
+                        
+                        style INPUT fill:#ff6600,stroke:#cc5200,stroke-width:3px,color:#fff
+                        style A fill:#ffe6cc,stroke:#ff6600,stroke-width:2px
+                        style B fill:#ffe6cc,stroke:#ff6600,stroke-width:2px
+                        style C fill:#ffe6cc,stroke:#ff6600,stroke-width:2px
+                        style D fill:#ffe6cc,stroke:#ff6600,stroke-width:2px
+                        style E fill:#ffe6cc,stroke:#ff6600,stroke-width:2px
+                        style F fill:#ffe6cc,stroke:#ff6600,stroke-width:2px
+                        style G fill:#ffe6cc,stroke:#ff6600,stroke-width:2px
+                        style H fill:#ffe6cc,stroke:#ff6600,stroke-width:2px
+                        style PROCESS fill:#ff6600,stroke:#cc5200,stroke-width:3px,color:#fff
+                        style STORE fill:#ffcc00,stroke:#cc9900,stroke-width:3px,color:#000
+                        style TABLES fill:#ffcc00,stroke:#cc9900,stroke-width:3px,color:#000
+                        style T1 fill:#ffe6b3,stroke:#ffcc00,stroke-width:2px
+                        style T2 fill:#ffe6b3,stroke:#ffcc00,stroke-width:2px
+                        style T3 fill:#ffe6b3,stroke:#ffcc00,stroke-width:2px
+                        style T4 fill:#ffe6b3,stroke:#ffcc00,stroke-width:2px
+                        style T5 fill:#ffe6b3,stroke:#ffcc00,stroke-width:2px
+                        style T6 fill:#ffe6b3,stroke:#ffcc00,stroke-width:2px
+                        style T7 fill:#ffe6b3,stroke:#ffcc00,stroke-width:2px
+                        style T8 fill:#ffe6b3,stroke:#ffcc00,stroke-width:2px
+                        style ACCESS fill:#00a366,stroke:#007a4d,stroke-width:3px,color:#fff
+                        style USE1 fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style USE2 fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style USE3 fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style USE4 fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style USE5 fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style USE6 fill:#ccf0e6,stroke:#00a366,stroke-width:2px
+                        style OUTPUT fill:#0066cc,stroke:#004a99,stroke-width:3px,color:#fff
+                        style OUT1 fill:#cce6ff,stroke:#0066cc,stroke-width:2px
+                        style OUT2 fill:#cce6ff,stroke:#0066cc,stroke-width:2px
+                        style OUT3 fill:#cce6ff,stroke:#0066cc,stroke-width:2px
+                        style OUT4 fill:#cce6ff,stroke:#0066cc,stroke-width:2px
+                    </div>
+            </div>
+            
+            <div class="description">
+                <h4>📋 Data Journey:</h4>
+                <p><strong>Input:</strong> Data created by users (admin, instructors, students)</p>
+                <p><strong>Processing:</strong> Data validated and organized</p>
+                <p><strong>Storage:</strong> Persisted to database tables</p>
+                <p><strong>Access:</strong> Retrieved via SQL queries</p>
+                <p><strong>Output:</strong> Delivered to users via downloads and reports</p>
+            </div>
+
+            <div class="page-reference">
+                <strong>Database Tables:</strong> students, instructors, courses, teacher_lessons, teacher_assignments, teacher_assignment_submissions, teacher_grade_records, announcements
+            </div>
+        </div>
+
+        <!-- DIAGRAM 6: ROLE INTERACTIONS -->
+        <div class="diagram-section">
+            <h2>🔗 Role Interactions & Dependencies</h2>
+            <div class="diagram-container">
+                <div class="mermaid">
+                    graph TD
+                        ADMIN["👨‍💼 ADMIN<br/>Dashboard: dashboard.php"]
+                        INSTRUCTOR["👨‍🏫 INSTRUCTOR<br/>Dashboard: instructor_dashboard.php"]
+                        STUDENT["🎓 STUDENT<br/>Dashboard: student_dashboard.php"]
+                        
+                        A1["Creates User Accounts<br/>manage_instructors.php"]
+                        A2["Creates Student Accounts<br/>manage_students.php"]
+                        A3["Creates Courses<br/>manage_courses.php"]
+                        A4["Broadcasts Announcements<br/>announcements.php"]
+                        A5["Views System Analytics<br/>analytics.php"]
+                        
+                        I1["Receives Account<br/>from Admin"]
+                        I2["Gets Assigned to<br/>Courses"]
+                        I3["Creates Lessons<br/>lessons.php"]
+                        I4["Creates Assignments<br/>teacher_assignments"]
+                        I5["Records Grades<br/>grades.php"]
+                        I6["Views Own Analytics<br/>Track Performance"]
+                        
+                        S1["Receives Account<br/>from Admin"]
+                        S2["Gets Enrolled in<br/>Courses by Admin"]
+                        S3["Views Lessons Created<br/>by Instructors<br/>lessons.php"]
+                        S4["Downloads Materials<br/>from Instructors"]
+                        S5["Completes Assignments<br/>from Instructors<br/>submit_assignment.php"]
+                        S6["Views Grades From<br/>Instructors<br/>grade.php"]
+                        
+                        ADMIN -->|A1| I1
+                        ADMIN -->|A2| S1
+                        ADMIN -->|A3| I2
+                        ADMIN -->|A3| S2
+                        ADMIN -->|A4| INSTRUCTOR
+                        ADMIN -->|A4| STUDENT
+                        ADMIN -->|A5| A5
+                        
+                        I1 -->|Receives| INSTRUCTOR
+                        I2 -->|Receives| INSTRUCTOR
+                        INSTRUCTOR -->|I3| I3
+                        INSTRUCTOR -->|I4| I4
+                        INSTRUCTOR -->|I5| I5
+                        INSTRUCTOR -->|I6| I6
+                        
+                        S1 -->|Receives| STUDENT
+                        S2 -->|Receives| STUDENT
+                        STUDENT -->|S3| S3
+                        STUDENT -->|S4| S4
+                        STUDENT -->|S5| S5
+                        STUDENT -->|S6| S6
+                        
+                        I3 -->|CREATES| DB1["Lessons in<br/>teacher_lessons"]
+                        I4 -->|CREATES| DB2["Assignments in<br/>teacher_assignments"]
+                        I5 -->|RECORDS| DB3["Grades in<br/>teacher_grade_records"]
+                        
+                        S3 -->|READS| DB1
+                        S4 -->|READS| DB1
+                        S5 -->|CREATES| DB4["Submissions in<br/>teacher_assignment_submissions"]
+                        S6 -->|READS| DB3
+                        
+                        I5 -->|REVIEWS| DB4
+                        I5 -->|GRADES| S5
+                        
+                        A4 -->|CREATES| DB5["Announcements in<br/>announcements"]
+                        A4 -.->|Visible to| INSTRUCTOR
+                        A4 -.->|Visible to| STUDENT
+                        
+                        I6 -->|ANALYZES| DB2
+                        I6 -->|ANALYZES| DB3
+                        I6 -->|ANALYZES| DB4
+                        A5 -->|ANALYZES ALL| DB1
+                        A5 -->|ANALYZES ALL| DB2
+                        A5 -->|ANALYZES ALL| DB3
+                        A5 -->|ANALYZES ALL| DB4
+                        
+                        style ADMIN fill:#0066cc,stroke:#004a99,stroke-width:3px,color:#fff
+                        style INSTRUCTOR fill:#0066cc,stroke:#004a99,stroke-width:3px,color:#fff
+                        style STUDENT fill:#0066cc,stroke:#004a99,stroke-width:3px,color:#fff
+                        
+                        style A1 fill:#ff3366,stroke:#cc1a4d,stroke-width:2px,color:#fff
+                        style A2 fill:#ff3366,stroke:#cc1a4d,stroke-width:2px,color:#fff
+                        style A3 fill:#ff3366,stroke:#cc1a4d,stroke-width:2px,color:#fff
+                        style A4 fill:#ff3366,stroke:#cc1a4d,stroke-width:2px,color:#fff
+                        style A5 fill:#ff3366,stroke:#cc1a4d,stroke-width:2px,color:#fff
+                        
+                        style I1 fill:#00a366,stroke:#007a4d,stroke-width:2px,color:#fff
+                        style I2 fill:#00a366,stroke:#007a4d,stroke-width:2px,color:#fff
+                        style I3 fill:#00a366,stroke:#007a4d,stroke-width:2px,color:#fff
+                        style I4 fill:#00a366,stroke:#007a4d,stroke-width:2px,color:#fff
+                        style I5 fill:#00a366,stroke:#007a4d,stroke-width:2px,color:#fff
+                        style I6 fill:#00a366,stroke:#007a4d,stroke-width:2px,color:#fff
+                        
+                        style S1 fill:#00a366,stroke:#007a4d,stroke-width:2px,color:#fff
+                        style S2 fill:#00a366,stroke:#007a4d,stroke-width:2px,color:#fff
+                        style S3 fill:#00a366,stroke:#007a4d,stroke-width:2px,color:#fff
+                        style S4 fill:#00a366,stroke:#007a4d,stroke-width:2px,color:#fff
+                        style S5 fill:#00a366,stroke:#007a4d,stroke-width:2px,color:#fff
+                        style S6 fill:#00a366,stroke:#007a4d,stroke-width:2px,color:#fff
+                        
+                        style DB1 fill:#ffcc00,stroke:#cc9900,stroke-width:2px,color:#000
+                        style DB2 fill:#ffcc00,stroke:#cc9900,stroke-width:2px,color:#000
+                        style DB3 fill:#ffcc00,stroke:#cc9900,stroke-width:2px,color:#000
+                        style DB4 fill:#ffcc00,stroke:#cc9900,stroke-width:2px,color:#000
+                        style DB5 fill:#ffcc00,stroke:#cc9900,stroke-width:2px,color:#000
+                    </div>
+            </div>
+            
+            <div class="description">
+                <h4>📋 How Roles Interact:</h4>
+                <p><strong>Admin → Instructor:</strong> Creates instructor accounts, assigns to courses, broadcasts announcements</p>
+                <p><strong>Admin → Student:</strong> Creates student accounts, enrolls in courses, broadcasts announcements</p>
+                <p><strong>Instructor → Student:</strong> Creates lessons, assignments; records grades based on submissions</p>
+                <p><strong>Student → Instructor:</strong> Views lessons, downloads materials, submits assignments for grading</p>
+                <p><strong>Admin → Database:</strong> Full system analytics and monitoring access</p>
+                <p><strong>Instructor → Database:</strong> Creates content, records grades, views analytics on own classes</p>
+                <p><strong>Student → Database:</strong> Views content, submits work, views own grades</p>
+            </div>
+
+            <div class="page-reference">
+                <strong>Key Interactions:</strong>
+                <br/>1. Admin Account Creation → Enables user login
+                <br/>2. Admin Course Creation → Determines what Instructors can teach & Students can enroll in
+                <br/>3. Instructor Lesson Creation → Content available to Students
+                <br/>4. Instructor Assignment Creation → Tasks assigned to Students
+                <br/>5. Student Assignment Submission → Triggers Instructor grading
+                <br/>6. Instructor Grade Recording → Visible to Students via grade.php
+                <br/>7. Announcements → Visible to all roles through dashboard
+            </div>
+        </div>
+
+        <!-- COLOR LEGEND -->
+        <div class="diagram-section" style="background: #f8f9fa;">
+            <h2>🎨 Color & Symbol Legend</h2>
+            
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color color-auth"></div>
+                    <div class="legend-text"><strong>Blue:</strong> Authentication & Access</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color color-content"></div>
+                    <div class="legend-text"><strong>Green:</strong> Content & Learning</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color color-work"></div>
+                    <div class="legend-text"><strong>Orange:</strong> Assignments & Work</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color color-grade"></div>
+                    <div class="legend-text"><strong>Pink/Red:</strong> Grading & Results</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color color-system"></div>
+                    <div class="legend-text"><strong>Yellow:</strong> Database & System</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACTUAL FUNCTIONS REFERENCE -->
+        <div class="diagram-section">
+            <h2>📚 Complete Functions Reference</h2>
+            
+            <div class="description">
+                <h4>🔐 Authentication Functions</h4>
+                <p><strong>Files:</strong> auth/login_handler.php, admin/login_handler.php, instructor/login_handler.php, student/login_handler.php</p>
+                <p>• Check credentials against database</p>
+                <p>• Create session variables</p>
+                <p>• Redirect to appropriate dashboard</p>
+            </div>
+
+            <div class="description">
+                <h4>📊 Admin Functions</h4>
+                <p><strong>Dashboard:</strong> admin/dashboard.php</p>
+                <p>• Display total courses, students, instructors, announcements</p>
+                <p>• Show recent announcements</p>
+                <p>• Display analytics charts</p>
+                <p><strong>Student Management:</strong> admin/manage_students.php + save_student.php</p>
+                <p>• Search students (search_student.php)</p>
+                <p>• Add new student</p>
+                <p>• Edit student information</p>
+                <p>• Delete student (delete_student.php)</p>
+                <p><strong>Instructor Management:</strong> admin/manage_instructors.php + save_instructor.php</p>
+                <p>• Search instructors (search_instructor.php)</p>
+                <p>• Add new instructor</p>
+                <p>• Edit instructor information</p>
+                <p>• Delete instructor (delete_instructor.php)</p>
+                <p><strong>Course Management:</strong> admin/manage_courses.php + save_course.php</p>
+                <p>• Create courses</p>
+                <p>• Edit courses</p>
+                <p>• Remove courses (remove_course.php)</p>
+                <p><strong>Announcements:</strong> admin/announcements.php</p>
+                <p>• Create announcements</p>
+                <p>• Broadcast to students/teachers</p>
+                <p><strong>Analytics:</strong> admin/analytics.php + get_analytics_data.php</p>
+                <p>• Display system-wide analytics</p>
+                <p>• Generate reports</p>
+            </div>
+
+            <div class="description">
+                <h4>👨‍🏫 Instructor Functions</h4>
+                <p><strong>Dashboard:</strong> instructor/instructor_dashboard.php</p>
+                <p>• Display recent announcements</p>
+                <p>• Show recently uploaded materials</p>
+                <p>• Show pending activities</p>
+                <p>• Calendar integration</p>
+                <p><strong>Lessons:</strong> instructor/lessons.php</p>
+                <p>• Create new lesson</p>
+                <p>• Upload lesson materials (files)</p>
+                <p>• Manage existing lessons</p>
+                <p><strong>Grades:</strong> instructor/grades.php</p>
+                <p>• Select grade level and subject</p>
+                <p>• Choose grading period (1st, 2nd, 3rd, 4th)</p>
+                <p>• View list of students</p>
+                <p>• Record individual grades</p>
+                <p>• View and generate report cards (get_report_card.php)</p>
+                <p><strong>My Class:</strong> instructor/my_class.php</p>
+                <p>• View assigned students</p>
+                <p>• View assigned sections</p>
+            </div>
+
+            <div class="description">
+                <h4>🎓 Student Functions</h4>
+                <p><strong>Dashboard:</strong> student/student_dashboard.php</p>
+                <p>• Display latest announcements</p>
+                <p>• Show pending assignments with due dates</p>
+                <p>• Display calendar events</p>
+                <p><strong>Lessons:</strong> student/lessons.php</p>
+                <p>• List all available lessons</p>
+                <p>• View lesson details</p>
+                <p>• Download lesson materials (download_lesson.php)</p>
+                <p>• Save recently viewed to local storage</p>
+                <p><strong>My Courses:</strong> student/my_courses.php</p>
+                <p>• List enrolled courses</p>
+                <p>• View course information</p>
+                <p><strong>Assignments:</strong> student/submit_assignment.php</p>
+                <p>• View all assignments</p>
+                <p>• Check due dates and status</p>
+                <p>• Upload assignment submissions</p>
+                <p>• Track submission status</p>
+                <p><strong>Grades:</strong> student/grade.php</p>
+                <p>• View grades by grading period</p>
+                <p>• Generate report card (get_report_card.php)</p>
+                <p>• Download official report card</p>
+            </div>
+
+            <div class="description">
+                <h4>💾 Database Operations</h4>
+                <p><strong>Connection:</strong> config/database.php, includes/databases/db_connection.php</p>
+                <p>• MySQL connection to school_lms database</p>
+                <p>• Query execution functions</p>
+                <p><strong>API Endpoints:</strong> api/get_report_card.php</p>
+                <p>• Generate report card JSON</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>✅ All diagrams represent <strong>actual pages and functions</strong> used in MUCAHUB LMS</p>
+            <p>📄 Updated: May 16, 2026 | Database: school_lms | Status: Complete</p>
+            <p>💡 Right-click any diagram to save as JPG | Print to PDF for best quality</p>
+        </footer>
+    </div>
+
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'default', securityLevel: 'loose' });
+        mermaid.contentLoaded();
+    </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+{
+    "Kinder": [
+        "English",
+        "Mathematics",
+        "Science"
+    ],
+    "Grade 1": [
+        "English",
+        "Mathematics",
+        "Science"
+    ],
+    "Grade 2": [
+        "English",
+        "Mathematics",
+        "Science"
+    ],
+    "Grade 3": [
+        "English",
+        "Mathematics",
+        "Science"
+    ],
+    "Grade 4": [
+        "English",
+        "Mathematics",
+        "Science",
+        "Filipino"
+    ],
+    "Grade 5": [
+        "English",
+        "Mathematics",
+        "Science",
+        "Filipino"
+    ],
+    "Grade 6": [
+        "English",
+        "Mathematics",
+        "Science",
+        "Filipino"
+    ],
+    "Grade 7": [
+        "English",
+        "Mathematics",
+        "Filipino",
+        "MAPEH",
+        "TLE",
+        "History"
+    ],
+    "Grade 8": [
+        "English",
+        "Mathematics",
+        "Science",
+        "Filipino",
+        "MAPEH",
+        "TLE",
+        "History"
+    ],
+    "Grade 9": [
+        "English",
+        "Mathematics",
+        "Science",
+        "Filipino",
+        "MAPEH",
+        "TLE",
+        "History"
+    ],
+    "Grade 10": [
+        "English",
+        "Mathematics",
+        "Science",
+        "Filipino",
+        "MAPEH",
+        "TLE",
+        "History"
+    ]
+}

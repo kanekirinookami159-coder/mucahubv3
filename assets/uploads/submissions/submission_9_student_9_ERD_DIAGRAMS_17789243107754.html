@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mucahub LMS - Entity Relationship Diagrams</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #1a237e;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            text-align: center;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #555;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        .diagram-section {
+            margin: 50px 0;
+            page-break-inside: avoid;
+        }
+        
+        .diagram-title {
+            font-size: 1.8em;
+            color: #0d47a1;
+            margin: 30px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #0d47a1;
+        }
+        
+        .diagram-description {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.05em;
+            line-height: 1.6;
+        }
+        
+        .mermaid {
+            display: flex;
+            justify-content: center;
+            background: white;
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .export-info {
+            background: #e3f2fd;
+            border-left: 4px solid #1976d2;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .export-info strong {
+            color: #0d47a1;
+        }
+        
+        .footer {
+            text-align: center;
+            color: #888;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            font-size: 0.9em;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                padding: 0;
+            }
+            .mermaid {
+                border: none;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'base',
+            securityLevel: 'loose',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>🎓 Mucahub LMS - Database ERD</h1>
+        <p class="subtitle">Entity Relationship Diagrams with High Visibility</p>
+        
+        <div class="export-info">
+            <strong>📥 How to Save as JPG:</strong><br>
+            1. Right-click on any diagram → "Save image as" → Choose .jpg format<br>
+            2. Or: Print to PDF → Open PDF → Export as JPG<br>
+            3. Or: Use browser's screenshot tool (F12 → Device Toolbar) for high resolution
+        </div>
+        
+        <!-- DIAGRAM 1: DETAILED DATA FLOW -->
+        <div class="diagram-section">
+            <h2 class="diagram-title">📊 1. Detailed Data Flow (Functional Organization)</h2>
+            <p class="diagram-description">
+                <strong>Best For:</strong> Developers, Database Administrators, Detailed Analysis<br>
+                Shows all 12 tables with key fields, organized by functional domain with straight-line connections and minimal overlap.
+            </p>
+            <div class="mermaid">
+                graph TB
+                    subgraph Users["👥 USER MANAGEMENT"]
+                        ADMINS["<b>ADMINS</b><br/>id PK<br/>email UK<br/>name, password"]
+                        INSTRUCTORS["<b>INSTRUCTORS</b><br/>id PK<br/>employee_number<br/>advisory_grade<br/>advisory_section"]
+                        STUDENTS["<b>STUDENTS</b><br/>id PK<br/>student_id<br/>grade_level<br/>section<br/>adviser"]
+                    end
+                    
+                    subgraph Content["📚 LEARNING CONTENT"]
+                        LESSONS["<b>TEACHER_LESSONS</b><br/>id PK<br/>instructor_id FK<br/>grade_level<br/>section<br/>subject_name<br/>grading_period<br/>title, file_path"]
+                        LESSON_ACCESS["<b>TEACHER_LESSON_ACCESS</b><br/>id PK<br/>lesson_id FK<br/>accessed_at"]
+                    end
+                    
+                    subgraph Assignments["📋 ASSIGNMENTS & SUBMISSIONS"]
+                        ASSIGN["<b>TEACHER_ASSIGNMENTS</b><br/>id PK<br/>instructor_id FK<br/>grade_level<br/>section<br/>subject_name<br/>grading_period<br/>assignment_type<br/>open_date/time<br/>due_date/time<br/>max_points"]
+                        SUBMIT["<b>TEACHER_ASSIGNMENT_SUBMISSIONS</b><br/>id PK<br/>assignment_id FK<br/>student_id FK<br/>submission_file_path<br/>submitted_at<br/>status"]
+                        GROUPS["<b>TEACHER_ASSIGNMENT_GROUPS</b><br/>id PK<br/>assignment_id FK<br/>group_name<br/>leader_student_id FK"]
+                    end
+                    
+                    subgraph Grades["⭐ GRADING SYSTEM"]
+                        GRADES_PER["<b>TEACHER_GRADE_RECORDS</b><br/>id PK<br/>assignment_id FK<br/>instructor_id FK<br/>student_id FK<br/>grade_level<br/>section<br/>subject_name<br/>grading_period<br/>grade_value"]
+                        GRADES_ACTIVITY["<b>TEACHER_ACTIVITY_GRADE_RECORDS</b><br/>id PK<br/>assignment_id FK<br/>instructor_id FK<br/>student_id FK<br/>activity_title<br/>grade_level<br/>section<br/>subject_name<br/>status<br/>grade_value"]
+                    end
+                    
+                    subgraph System["⚙️ SYSTEM"]
+                        LOGIN["<b>LOGIN_HISTORY</b><br/>id PK<br/>user_id<br/>name<br/>role<br/>login_time<br/>logout_time"]
+                        ANNOUNCE["<b>ANNOUNCEMENTS</b><br/>id PK<br/>title<br/>description<br/>target<br/>files"]
+                    end
+                    
+                    %% User to Content
+                    INSTRUCTORS -->|creates| LESSONS
+                    STUDENTS -->|accesses| LESSON_ACCESS
+                    LESSON_ACCESS -->|tracks| LESSONS
+                    
+                    %% User to Assignments
+                    INSTRUCTORS -->|creates| ASSIGN
+                    STUDENTS -->|submits| SUBMIT
+                    ASSIGN -->|has| SUBMIT
+                    
+                    %% Assignment Groups
+                    STUDENTS -->|leads| GROUPS
+                    ASSIGN -->|organizes| GROUPS
+                    
+                    %% Grading
+                    INSTRUCTORS -->|records| GRADES_PER
+                    STUDENTS -->|receives| GRADES_PER
+                    ASSIGN -->|evaluates| GRADES_PER
+                    
+                    INSTRUCTORS -->|grades| GRADES_ACTIVITY
+                    STUDENTS -->|receives activity| GRADES_ACTIVITY
+                    ASSIGN -->|generates| GRADES_ACTIVITY
+                    SUBMIT -->|tracked by| GRADES_ACTIVITY
+                    
+                    %% System
+                    ADMINS -->|manages| ANNOUNCE
+                    ADMINS -->|logs| LOGIN
+                    INSTRUCTORS -->|logs| LOGIN
+                    STUDENTS -->|logs| LOGIN
+                    
+                    style Users fill:#e1f5ff,stroke:#0d47a1,stroke-width:3px
+                    style Content fill:#f3e5f5,stroke:#4a148c,stroke-width:3px
+                    style Assignments fill:#fff3e0,stroke:#e65100,stroke-width:3px
+                    style Grades fill:#e8f5e9,stroke:#1b5e20,stroke-width:3px
+                    style System fill:#fce4ec,stroke:#880e4f,stroke-width:3px
+            </div>
+        </div>
+        
+        <!-- DIAGRAM 2: MODULE ARCHITECTURE -->
+        <div class="diagram-section">
+            <h2 class="diagram-title">🏗️ 2. Module Architecture Overview</h2>
+            <p class="diagram-description">
+                <strong>Best For:</strong> Stakeholders, Project Managers, System Design<br>
+                High-level 5-module system showing major components and their interactions with a clear left-to-right flow.
+            </p>
+            <div class="mermaid">
+                graph LR
+                    subgraph Users["👥 USERS"]
+                        A["ADMINS<br/>(Admin Accounts)"]
+                        I["INSTRUCTORS<br/>(Teachers)"]
+                        S["STUDENTS<br/>(Learners)"]
+                    end
+                    
+                    subgraph Content["📚 CONTENT<br/>& LEARNING"]
+                        L["TEACHER_LESSONS<br/>(Course Materials)"]
+                        LA["TEACHER_LESSON_ACCESS<br/>(Access Tracking)"]
+                    end
+                    
+                    subgraph Work["📋 WORK<br/>& SUBMISSIONS"]
+                        AS["TEACHER_ASSIGNMENTS<br/>(Activities/Quizzes)"]
+                        SU["TEACHER_ASSIGNMENT_SUBMISSIONS<br/>(Student Work)"]
+                        AG["TEACHER_ASSIGNMENT_GROUPS<br/>(Collaborative)"]
+                    end
+                    
+                    subgraph Performance["⭐ PERFORMANCE<br/>& GRADES"]
+                        GR["TEACHER_GRADE_RECORDS<br/>(Periodic Grades)"]
+                        GA["TEACHER_ACTIVITY_GRADE_RECORDS<br/>(Submission Grades)"]
+                    end
+                    
+                    subgraph System["⚙️ SYSTEM"]
+                        LH["LOGIN_HISTORY<br/>(Audit Trail)"]
+                        AN["ANNOUNCEMENTS<br/>(Broadcasts)"]
+                    end
+                    
+                    %% Relationships - Left side (Teachers manage content)
+                    I -->|creates| L
+                    L -->|tracked| LA
+                    S -->|access| LA
+                    
+                    %% Middle (Teachers create work, students submit)
+                    I -->|creates| AS
+                    AS -->|submitted| SU
+                    S -->|submit| SU
+                    AS -->|organizes| AG
+                    S -->|lead| AG
+                    
+                    %% Right (Grading)
+                    SU -->|results in| GA
+                    AS -->|evaluated| GR
+                    GA -->|informs| GR
+                    I -->|records| GR
+                    S -->|receives| GR
+                    
+                    %% System (Bottom)
+                    A -->|broadcast| AN
+                    A -->|audit| LH
+                    I -->|access| LH
+                    S -->|access| LH
+                    
+                    %% Styling
+                    style Users fill:#e3f2fd,stroke:#0d47a1,stroke-width:3px
+                    style Content fill:#f3e5f5,stroke:#7b1fa2,stroke-width:3px
+                    style Work fill:#fff3e0,stroke:#f57c00,stroke-width:3px
+                    style Performance fill:#e8f5e9,stroke:#388e3c,stroke-width:3px
+                    style System fill:#fce4ec,stroke:#c2185b,stroke-width:3px
+            </div>
+        </div>
+        
+        <!-- DIAGRAM 3: LAYERED ARCHITECTURE -->
+        <div class="diagram-section">
+            <h2 class="diagram-title">📑 3. Layered Architecture</h2>
+            <p class="diagram-description">
+                <strong>Best For:</strong> Architects, System Analysis, Implementation Planning<br>
+                Tables organized by logical layers from core entities to audit trail, showing data flow through system layers.
+            </p>
+            <div class="mermaid">
+                graph TB
+                    subgraph layer1["LAYER 1: CORE ENTITIES"]
+                        ADMINS["<b>ADMINS</b><br/>─────────<br/>• id PK<br/>• email UK<br/>• first_name, last_name<br/>• password"]
+                        
+                        INSTRUCTORS["<b>INSTRUCTORS</b><br/>─────────<br/>• id PK<br/>• employee_number<br/>• first_name, last_name<br/>• advisory_grade<br/>• advisory_section"]
+                        
+                        STUDENTS["<b>STUDENTS</b><br/>─────────<br/>• id PK<br/>• student_id, lrn<br/>• first_name, last_name<br/>• grade_level<br/>• section"]
+                    end
+                    
+                    subgraph layer2["LAYER 2: CONTENT & TRACKING"]
+                        LESSONS["<b>TEACHER_LESSONS</b><br/>─────────<br/>• id PK<br/>• instructor_id FK<br/>• title<br/>• file_path"]
+                        
+                        LESSON_ACCESS["<b>TEACHER_LESSON_ACCESS</b><br/>─────────<br/>• id PK<br/>• lesson_id FK<br/>• accessed_at"]
+                        
+                        ANNOUNCE["<b>ANNOUNCEMENTS</b><br/>─────────<br/>• id PK<br/>• title<br/>• description<br/>• target"]
+                    end
+                    
+                    subgraph layer3["LAYER 3: ASSIGNMENTS"]
+                        ASSIGN["<b>TEACHER_ASSIGNMENTS</b><br/>─────────<br/>• id PK<br/>• instructor_id FK<br/>• title<br/>• due_date<br/>• max_points"]
+                        
+                        SUBMIT["<b>SUBMISSIONS</b><br/>─────────<br/>• id PK<br/>• assignment_id FK<br/>• student_id FK<br/>• status<br/>• submitted_at"]
+                        
+                        GROUPS["<b>ASSIGNMENT_GROUPS</b><br/>─────────<br/>• id PK<br/>• assignment_id FK<br/>• leader_student_id FK"]
+                    end
+                    
+                    subgraph layer4["LAYER 4: GRADING"]
+                        GRADES["<b>GRADE_RECORDS</b><br/>─────────<br/>• id PK<br/>• student_id FK<br/>• instructor_id FK<br/>• grade_value<br/>• grading_period"]
+                        
+                        ACTIVITY_GRADES["<b>ACTIVITY_GRADES</b><br/>─────────<br/>• id PK<br/>• student_id FK<br/>• assignment_id FK<br/>• grade_value<br/>• status"]
+                    end
+                    
+                    subgraph layer5["LAYER 5: AUDIT"]
+                        LOGIN["<b>LOGIN_HISTORY</b><br/>─────────<br/>• id PK<br/>• user_id<br/>• role<br/>• login_time<br/>• logout_time"]
+                    end
+                    
+                    %% Connections between layers
+                    INSTRUCTORS -->|creates| LESSONS
+                    STUDENTS -->|access| LESSON_ACCESS
+                    LESSON_ACCESS -->|references| LESSONS
+                    
+                    ADMINS -->|creates| ANNOUNCE
+                    
+                    INSTRUCTORS -->|creates| ASSIGN
+                    STUDENTS -->|submit| SUBMIT
+                    ASSIGN -->|has| SUBMIT
+                    
+                    STUDENTS -->|lead| GROUPS
+                    ASSIGN -->|organizes| GROUPS
+                    
+                    INSTRUCTORS -->|records| GRADES
+                    STUDENTS -->|receive| GRADES
+                    
+                    SUBMIT -->|evaluated as| ACTIVITY_GRADES
+                    ASSIGN -->|generates| ACTIVITY_GRADES
+                    
+                    ADMINS -->|login| LOGIN
+                    INSTRUCTORS -->|login| LOGIN
+                    STUDENTS -->|login| LOGIN
+                    
+                    %% Styling
+                    style layer1 fill:#e3f2fd,stroke:#0d47a1,stroke-width:3px
+                    style layer2 fill:#f3e5f5,stroke:#4a148c,stroke-width:3px
+                    style layer3 fill:#fff3e0,stroke:#e65100,stroke-width:3px
+                    style layer4 fill:#e8f5e9,stroke:#1b5e20,stroke-width:3px
+                    style layer5 fill:#fce4ec,stroke:#880e4f,stroke-width:3px
+                    
+                    style ADMINS fill:#fff,stroke:#1976d2,stroke-width:2px
+                    style INSTRUCTORS fill:#fff,stroke:#1976d2,stroke-width:2px
+                    style STUDENTS fill:#fff,stroke:#1976d2,stroke-width:2px
+                    
+                    style LESSONS fill:#fff,stroke:#7b1fa2,stroke-width:2px
+                    style LESSON_ACCESS fill:#fff,stroke:#7b1fa2,stroke-width:2px
+                    style ANNOUNCE fill:#fff,stroke:#7b1fa2,stroke-width:2px
+                    
+                    style ASSIGN fill:#fff,stroke:#f57c00,stroke-width:2px
+                    style SUBMIT fill:#fff,stroke:#f57c00,stroke-width:2px
+                    style GROUPS fill:#fff,stroke:#f57c00,stroke-width:2px
+                    
+                    style GRADES fill:#fff,stroke:#388e3c,stroke-width:2px
+                    style ACTIVITY_GRADES fill:#fff,stroke:#388e3c,stroke-width:2px
+                    
+                    style LOGIN fill:#fff,stroke:#c2185b,stroke-width:2px
+            </div>
+        </div>
+        
+        <!-- LEGEND & INSTRUCTIONS -->
+        <div class="diagram-section">
+            <h2 class="diagram-title">📖 Legend & Usage Guide</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 20px 0;">
+                <div>
+                    <h3 style="color: #0d47a1; margin-bottom: 15px; font-size: 1.2em;">🎨 Color Scheme</h3>
+                    <div style="background: #e3f2fd; padding: 10px; margin: 8px 0; border-left: 4px solid #0d47a1;">
+                        <strong style="color: #0d47a1;">🔵 Blue</strong> - User Management & Accounts
+                    </div>
+                    <div style="background: #f3e5f5; padding: 10px; margin: 8px 0; border-left: 4px solid #7b1fa2;">
+                        <strong style="color: #7b1fa2;">🟣 Purple</strong> - Content & Learning Materials
+                    </div>
+                    <div style="background: #fff3e0; padding: 10px; margin: 8px 0; border-left: 4px solid #f57c00;">
+                        <strong style="color: #f57c00;">🟠 Orange</strong> - Work & Submissions
+                    </div>
+                    <div style="background: #e8f5e9; padding: 10px; margin: 8px 0; border-left: 4px solid #388e3c;">
+                        <strong style="color: #388e3c;">🟢 Green</strong> - Performance & Grading
+                    </div>
+                    <div style="background: #fce4ec; padding: 10px; margin: 8px 0; border-left: 4px solid #c2185b;">
+                        <strong style="color: #c2185b;">🩷 Pink</strong> - System & Audit
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style="color: #0d47a1; margin-bottom: 15px; font-size: 1.2em;">📋 Key Abbreviations</h3>
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.95em;">
+                        <tr style="background: #f5f5f5;">
+                            <td style="border: 1px solid #ddd; padding: 10px; font-weight: bold;">PK</td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">Primary Key</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 10px; font-weight: bold;">FK</td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">Foreign Key</td>
+                        </tr>
+                        <tr style="background: #f5f5f5;">
+                            <td style="border: 1px solid #ddd; padding: 10px; font-weight: bold;">UK</td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">Unique Key</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 10px; font-weight: bold;">→</td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">Relationship</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Mucahub LMS - Database Schema</strong></p>
+            <p>Database: school_lms | Charset: utf8mb4 | Tables: 12 | Generated: May 16, 2026</p>
+            <p>For complete documentation, see DATABASE_SCHEMA_ERD.md and ERD_VISUAL_GUIDE.md</p>
+        </div>
+    </div>
+</body>
+</html>
