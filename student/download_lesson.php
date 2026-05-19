@@ -4,6 +4,11 @@ session_start();
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../includes/databases/db_connection.php';
 
+/*
+|--------------------------------------------------------------------------
+| CHECK LOGIN
+|--------------------------------------------------------------------------
+*/
 $userRole = $_SESSION['role'] ?? $_SESSION['user_role'] ?? '';
 $userId = intval($_SESSION['user_id'] ?? 0);
 
@@ -12,6 +17,11 @@ if ($userRole !== 'student' || $userId <= 0) {
     exit;
 }
 
+/*
+|--------------------------------------------------------------------------
+| GET LESSON ID
+|--------------------------------------------------------------------------
+*/
 $lessonId = intval($_GET['lesson_id'] ?? 0);
 
 if ($lessonId <= 0) {
@@ -21,7 +31,7 @@ if ($lessonId <= 0) {
 
 /*
 |--------------------------------------------------------------------------
-| GET STUDENT INFO
+| GET STUDENT GRADE + SECTION
 |--------------------------------------------------------------------------
 */
 $studentGrade = '';
@@ -40,21 +50,30 @@ if ($stmt = $conn->prepare($studentSql)) {
 
     $stmt->execute();
 
-    $stmt->bind_result($studentGrade, $studentSection);
+    $stmt->bind_result(
+        $studentGrade,
+        $studentSection
+    );
 
     $stmt->fetch();
 
     $stmt->close();
 }
 
+/*
+|--------------------------------------------------------------------------
+| VALIDATE STUDENT
+|--------------------------------------------------------------------------
+*/
 if (empty($studentGrade) || empty($studentSection)) {
+
     header('Location: my_courses.php');
     exit;
 }
 
 /*
 |--------------------------------------------------------------------------
-| GET LESSON
+| GET LESSON FILE
 |--------------------------------------------------------------------------
 */
 $filePath = '';
@@ -88,48 +107,26 @@ if ($stmt = $conn->prepare($lessonSql)) {
 
 /*
 |--------------------------------------------------------------------------
-| SAVE ACCESS HISTORY
+| FILE FOUND
 |--------------------------------------------------------------------------
 */
 if (!empty($filePath)) {
 
     /*
-    | IMPORTANT:
-    | Your Railway database DOES NOT have student_id column.
-    | Use user_id instead.
+    |--------------------------------------------------------------------------
+    | OPTIONAL ACCESS LOGGING
+    |--------------------------------------------------------------------------
+    | Removed because Railway DB columns do not match.
+    | You can re-add later after checking your table structure.
+    |--------------------------------------------------------------------------
     */
 
-    $accessSql = "
-        INSERT INTO teacher_lesson_access
-        (
-            lesson_id,
-            user_id,
-            accessed_at
-        )
-        VALUES
-        (
-            ?,
-            ?,
-            NOW()
-        )
-    ";
-
-    if ($stmt = $conn->prepare($accessSql)) {
-
-        $stmt->bind_param(
-            'ii',
-            $lessonId,
-            $userId
-        );
-
-        $stmt->execute();
-
-        $stmt->close();
-    }
+    // Example:
+    // INSERT INTO teacher_lesson_access ...
 
     /*
     |--------------------------------------------------------------------------
-    | IF GOOGLE DRIVE / EXTERNAL LINK
+    | EXTERNAL URL
     |--------------------------------------------------------------------------
     */
     if (preg_match('#^https?://#i', trim($filePath))) {
@@ -140,7 +137,7 @@ if (!empty($filePath)) {
 
     /*
     |--------------------------------------------------------------------------
-    | LOCAL FILE
+    | LOCAL FILE PATH
     |--------------------------------------------------------------------------
     */
     $filePath = trim($filePath);
@@ -152,6 +149,11 @@ if (!empty($filePath)) {
         $filePath = '../' . ltrim($filePath, '/');
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | REDIRECT TO FILE
+    |--------------------------------------------------------------------------
+    */
     header('Location: ' . $filePath);
     exit;
 }
