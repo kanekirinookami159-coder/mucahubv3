@@ -1,9 +1,4 @@
 <?php
-ob_start();
-
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
 
 /*
 |--------------------------------------------------------------------------
@@ -75,7 +70,7 @@ function getUserName($conn, $user_id)
 
 /*
 |--------------------------------------------------------------------------
-| CHECK IF ENROLLED
+| CHECK ENROLLMENT
 |--------------------------------------------------------------------------
 */
 function isEnrolled($conn, $student_id, $subject_id)
@@ -104,14 +99,14 @@ function isEnrolled($conn, $student_id, $subject_id)
 
         $result = $stmt->get_result();
 
-        $isEnrolled = (
+        $exists = (
             $result &&
             $result->num_rows > 0
         );
 
         $stmt->close();
 
-        return $isEnrolled;
+        return $exists;
     }
 
     return false;
